@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wuthering Waves Pull Estimates</title>
+    <link rel="stylesheet" href="WuWaStyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<script src="app.js" defer></script>
+
+<!-- ===================== Navbar ===================== -->
+<header class="navbar">
+    <div class="logo">WuWa Pulls</div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#inputs">Inputs</a></li>
+            <li><a href="#income">Income</a></li>
+            <li><a href="#data">Data</a></li>
+            <li><a href="#outputs">Outputs</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<!-- ===================== Hero ===================== -->
+<section id="hero" class="hero-section">
+    <h1>Welcome to the WuWa Pulls Predictor</h1>
+    <p>This is an upgraded version of my Google Sheet.</p>
+    <a href="#inputs" class="cta-btn">Get Started</a>
+</section>
+
+
+<!-- ===================== Inputs ===================== -->
+<section id="inputs" class="inputs-section">
+    <h2>Necessary Inputs</h2>
+
+    <form id="inputsForm">
+    <div class="grid inputs-grid">
+
+        <div class="card">
+            <h3>Current Currency Status</h3>
+            <div class="subgrid">
+                <div class="subcard">
+                    <label for="startingAstrites">Astrites</label>
+                    <input type="number" id="startingAstrites">
+                </div>
+
+                <div class="subcard">
+                    <label for="startingLunites">Lunites</label>
+                    <input type="number" id="startingLunites">
+                </div>
+
+                <div class="subcard">
+                    <label for="startingTides">Tides</label>
+                    <input type="number" id="startingTides">
+                </div>
+
+                <div class="subcard">
+                    <label for="startingWeapon">Weapon</label>
+                    <input type="number" id="startingWeapons">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Current Pull Situation</h3>
+            <div class="subgrid">
+                <div class="subcard">
+                    <label for="pity">Weapon Pity</label>
+                    <input type="number" id="weaponPity" max="79" oninput="enforceMax(this)">
+                </div>
+
+                <div class="subcard">
+                    <label for="pity">Character Pity</label>
+                    <input type="number" id="pity" max="79" oninput="enforceMax(this)">
+                </div>
+
+                <div class="subcard">
+                    <label><input type="checkbox" id="guarantee"> Guarantee</label>
+                </div>
+
+                <div class="subcard">
+                    <label for="date">End of Patch Date</label>
+                    <input type="date" id="date">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Pay-to-Win Options</h3>
+            <div class="subgrid">
+                <div class="subcard">
+                    <label><input type="checkbox" id="luniteSub"> Lunite Sub</label>
+                </div>
+
+                <div class="subcard">
+                    <label><input type="checkbox" id="battlePass"> Battle Pass</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </form>
+</section>
+
+
+<!-- ===================== Income ===================== -->
+<section id="income" class="income-section">
+    <h2>Astrite Income Sources Patch 3.4 - 3.5</h2>
+
+    <form id="incomeForm">
+    <div class="grid income-grid", id="incomeContainer"></div>
+
+    </form>
+
+</section>
+
+
+<!-- ===================== Future Plans & Goals Section ===================== -->
+<section id="planner" class="data-section">
+    <h2>Future Plans & Goals</h2>
+    
+    <div class="summary-wrapper">
+        
+        <!-- Card 1: Pull Projection -->
+        <div class="card">
+            <h3>Pull Projection</h3>
+            <div class="income-display-group">
+                <div class="total-pulls-row">
+                    <span>Total Projected Pulls:</span> 
+                    <span id="total-pulls-val">--</span>
+                </div>
+                <hr class="planner-hr">
+                <div><span>Forging Tides:</span> <span id="weapons-val">--</span></div>
+                <div><span>Radiant Tides:</span> <span id="tides-val">--</span></div>
+                <div><span>Astrites:</span> <span id="astrites-val">--</span></div>
+                <div><span>Lunites:</span> <span id="lunites-val">--</span></div>
+            </div>
+        </div>
+
+        <!-- Card 2: Pity Status -->
+        <div class="card">
+            <h3>Pity Status</h3>
+            <div class="income-display-group planner-gap">
+                <div><span>Weapon Pity:</span> <span id="weap-pity-val">--</span></div>
+                <div><span>Character Pity:</span> <span id="char-pity-val">--</span></div>
+                <div id="guarantee-status" class="guarantee-badge">
+                    <strong>Guarantee:</strong> --
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Container 3: The 3 Priorities Grid -->
+        <div class="pull-plan-grid" id="pullPlanContainer">
+            
+            <!-- 1st Priority -->
+            <div class="card priority-card">
+                <h3>1st Priority</h3>
+                
+                <!-- Character Setup -->
+                <div class="subcard">
+                    <label class="income-header-row">
+                        <input type="checkbox" id="p1_char_cb" checked>
+                        <span class="income-title format-title">Character</span>
+                    </label>
+                    <div class="priority-input-row">
+                        <span class="input-label">Sequences:</span>
+                        <input type="number" min="0" max="6" id="p1_char" value="0">
+                    </div>
+                </div>
+
+                <!-- Weapon Setup -->
+                <div class="subcard">
+                    <span class="income-title format-title">Weapon Banner</span>
+                    <div class="priority-input-row">
+                        <span class="input-label">Copies:</span>
+                        <input type="number" min="0" max="5" id="p1_weap" value="0">
+                    </div>
+                </div>
+
+                <label>
+                    <input type="checkbox" id="p1_today_cb">
+                    Pulling Today
+                </label>
+
+                <!-- Success Badge -->
+                <div class="success-badge">
+                    <span class="badge-title">Est. Success</span>
+                    <div id="prob-p1" class="badge-value">0.0%</div>
+                </div>
+            </div>
+
+            <!-- 2nd Priority -->
+            <div class="card priority-card">
+                <h3>2nd Priority</h3>
+                
+                <div class="subcard">
+                    <label class="income-header-row">
+                        <input type="checkbox" id="p2_char_cb">
+                        <span class="income-title format-title">Character</span>
+                    </label>
+                    <div class="priority-input-row">
+                        <span class="input-label">Sequences:</span>
+                        <input type="number" min="0" max="6" id="p2_char" value="0">
+                    </div>
+                </div>
+
+                <div class="subcard">
+                    <span class="income-title format-title">Weapon Banner</span>
+                    <div class="priority-input-row">
+                        <span class="input-label">Copies:</span>
+                        <input type="number" min="0" max="5" id="p2_weap" value="0">
+                    </div>
+                </div>
+                <p>Projected</p>
+                <div class="success-badge">
+                    <span class="badge-title">Est. Success</span>
+                    <div id="prob-p2" class="badge-value">0.0%</div>
+                </div>
+            </div>
+
+            <!-- 3rd Priority -->
+            <div class="card priority-card">
+                <h3>3rd Priority</h3>
+                
+                <div class="subcard">
+                    <label class="income-header-row">
+                        <input type="checkbox" id="p3_char_cb">
+                        <span class="income-title format-title">Character</span>
+                    </label>
+                    <div class="priority-input-row">
+                        <span class="input-label">Sequences:</span>
+                        <input type="number" min="0" max="6" id="p3_char" value="0">
+                    </div>
+                </div>
+
+                <div class="subcard">
+                    <span class="income-title format-title">Weapon Banner</span>
+                    <div class="priority-input-row">
+                        <span class="input-label">Copies:</span>
+                        <input type="number" min="0" max="5" id="p3_weap" value="0">
+                    </div>
+                </div>
+                <p>Projected</p>
+                <div class="success-badge">
+                    <span class="badge-title">Est. Success</span>
+                    <div id="prob-p3" class="badge-value">0.0%</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===================== Simulation Analytics Charts ===================== -->
+        <div class="simulation-analytics-container">
+            
+            <!-- Chart 1: The Survival Funnel -->
+            <div class="card sim-chart-card">
+                <h3 style="font-size: 16px; margin-bottom: 10px;">Goal Survival Rate</h3>
+                <div class="canvas-wrapper">
+                    <canvas id="survivalChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2: Failure Analysis Donut -->
+            <div class="card sim-chart-card">
+                <h3 style="font-size: 16px; margin-bottom: 10px;">Failure Points</h3>
+                <div class="canvas-wrapper">
+                    <canvas id="failureChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 3: Surplus Distribution (Histogram) -->
+            <div class="card sim-chart-card">
+                <h3 style="font-size: 16px; margin-bottom: 10px;">Leftover Pulls (If 100% Successful)</h3>
+                <div class="canvas-wrapper">
+                    <canvas id="surplusChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== Outputs ===================== -->
+<section class="outputs-section">
+    <h2>Outputs & Projections</h2>
+    
+    <!-- Shared container for side-by-side layout -->
+    <div class="split-layout-container">
+        
+        <!-- Chart Side -->
+        <div class="layout-column chart-wrapper">
+            <h3>Probability Distribution</h3>
+            <div class="chart-container">
+                <canvas id="probabilityChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Table Side -->
+        <div class="layout-column table-wrapper">
+            <h3>Currency Expense Breakdown</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pity</th>
+                            <th>Pulls</th>
+                            <th>Tides</th>
+                            <th>Astrites</th>
+                            <th>Lunites</th>
+                            <th>Proj Pulls</th>
+                            <th>Proj T</th>
+                            <th>Proj A</th>
+                            <th>Proj L</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTableBody">
+                        <!-- Dynamic rows injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== Footer ===================== -->
+<footer class="main-footer">
+    <p>&copy; 2026 WuWa Pulls Predictor</p>
+</footer>
+
+</body>
+</html>
