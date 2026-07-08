@@ -224,7 +224,7 @@ const incomeSections = [
             {
                 id: "explorationStory",
                 name: "Exploration Quests",
-                reward: { amount: 800, type: "astrites" },
+                reward: { amount: 80, type: "astrites" },
                 options: ["Place Holder A","Place Holder B"],
                 layout: "stacked"
             }
@@ -252,7 +252,7 @@ const incomeSections = [
             },
             {
                 id: "trials",
-                name: "Trials (May include 1.X reruns)",
+                name: "Trials (may include 1.X reruns)",
                 reward: { amount: 20, type: "astrites" },
                 options: ["Yang-Yang","Luuk","Lynae","Suisui","Aemeath"],
                 layout: "stacked"
@@ -484,6 +484,51 @@ function calculateIncomeTotals() {
     return totals;
 }
 
+// ===================== P2W =====================
+
+// Expose a function to let the main app fetch active global P2W totals
+function getP2WTotalLunites() {
+    const ptwTableBody = document.getElementById('ptwTableBody');
+    if (!ptwTableBody) return { lunites: 0, cost: 0 };
+
+    const rows = ptwTableBody.querySelectorAll('.ptw-row');
+    let totalGlobalLunites = 0;
+    let totalGlobalCost = 0;
+
+    rows.forEach(row => {
+        const checkboxes = row.querySelectorAll('.ptw-checkbox');
+        let rowLunites = 0;
+        let rowCost = 0;
+
+        checkboxes.forEach(cb => {
+            if (cb.checked) {
+                rowLunites += (parseInt(cb.dataset.lunites, 10) || 0) + (parseInt(cb.dataset.bonus, 10) || 0);
+                rowCost += parseFloat(cb.dataset.cost) || 0;
+            }
+        });
+
+        row.querySelector('.row-total').textContent = rowLunites.toLocaleString();
+        row.querySelector('.row-cost').textContent = `$${rowCost.toFixed(2)}`;
+
+        totalGlobalLunites += rowLunites;
+        totalGlobalCost += rowCost;
+    });
+
+    return { lunites: totalGlobalLunites, cost: totalGlobalCost };
+}
+
+// Attach the event listener once the DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    const ptwTableBody = document.getElementById('ptwTableBody');
+    if (!ptwTableBody) return;
+
+    ptwTableBody.addEventListener('change', (e) => {
+        if (e.target.classList.contains('ptw-checkbox')) {
+            // Trigger the global core application pipeline to handle the math
+            update(); 
+        }
+    });
+});
 
 // ===================== Input CALCULATIONS =====================
 function calculate() {
@@ -497,19 +542,20 @@ function calculate() {
     const incWeapons = state.totals?.weapons || 0;
     const dailies = state.daily || 0;
     const weeklies = state.weekly || 0;
+    const ptwTotals = state.globalLunites || 0;
 
     return {
         pity: state.pity || 0,
         startingAstrites: astrites,
-        startingLunites: lunites,
+        startingLunites: lunites + ptwTotals,
         startingTides: tides,
         startingWeapons: weapons,
-        pulls: Math.floor((astrites + lunites) / 160 + tides),
+        pulls: Math.floor((astrites + lunites + ptwTotals) / 160 + tides),
         projectedTides: Math.floor((tides + incTides)),
         projectedAstrites: Math.floor((astrites + incAstrites + weeklies + dailies)),
-        projectedLunites: Math.floor((lunites + incLunites)),
-        projectedPulls: Math.floor((astrites + incAstrites + weeklies + dailies + lunites + incLunites) / 160 + tides + incTides),
-        initialProjectedPulls: Math.floor((astrites + incAstrites + weeklies + dailies + lunites + incLunites) / 160 + tides + incTides),
+        projectedLunites: Math.floor((lunites + incLunites + ptwTotals)),
+        projectedPulls: Math.floor((astrites + incAstrites + weeklies + dailies + lunites + incLunites + ptwTotals) / 160 + tides + incTides),
+        initialProjectedPulls: Math.floor((astrites + incAstrites + weeklies + dailies + lunites + incLunites + ptwTotals) / 160 + tides + incTides),
         projectedWeapons: Math.floor((weapons + incWeapons)),
         irlCost: "—"
     };
@@ -635,7 +681,6 @@ function renderTable(calculated) {
         );
     }
 }
-
 
 // ===================== Probability Generator =====================
 
@@ -1256,6 +1301,11 @@ function updateUIsimulation(simData) {
 // ===================== APP FLOW =====================
 function update() {
     syncState();
+
+    const p2wData = getP2WTotalLunites();
+    state.globalLunites = p2wData.lunites;
+    state.globalCost = p2wData.cost; // Store total cash spent
+
     state.daily = calculateDailies();
     if (document.getElementById("daily")) document.getElementById("daily").textContent = state.daily;
 
