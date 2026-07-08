@@ -388,6 +388,16 @@ input[type="checkbox"] {
     margin-top: 20px;
 }
 
+/* Styling for the left layout column containing the stacked elements */
+.left-side-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; 
+    background: transparent !important; /* Let the individual internal cards handle the background */
+    padding: 0 !important; /* Removes padding overlap */
+    box-shadow: none !important; /* Removes duplicate wrapper shadow */
+}
+
 /* Base style for both layout columns */
 .layout-column {
     flex: 1; /* Distributes space evenly (50/50 split) */
