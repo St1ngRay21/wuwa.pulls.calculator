@@ -260,7 +260,7 @@
             
             <!-- Chart 1: The Survival Funnel -->
             <div class="card sim-chart-card">
-                <h3 style="font-size: 16px; margin-bottom: 10px;">Goal Survival Rate</h3>
+                <h3 style="font-size: 16px; margin-bottom: 10px;">Pull Success Rates</h3>
                 <div class="canvas-wrapper">
                     <canvas id="survivalChart"></canvas>
                 </div>
@@ -276,7 +276,7 @@
 
             <!-- Chart 3: Surplus Distribution (Histogram) -->
             <div class="card sim-chart-card">
-                <h3 style="font-size: 16px; margin-bottom: 10px;">Leftover Pulls (If 100% Successful)</h3>
+                <h3 style="font-size: 16px; margin-bottom: 10px;">Leftover Pulls (If Successful)</h3>
                 <div class="canvas-wrapper">
                     <canvas id="surplusChart"></canvas>
                 </div>
@@ -293,12 +293,103 @@
     
     <!-- Shared container for side-by-side layout -->
     <div class="split-layout-container">
-        
+
         <!-- Chart Side -->
-        <div class="layout-column chart-wrapper">
-            <h3>Probability Distribution</h3>
-            <div class="chart-container">
-                <canvas id="probabilityChart"></canvas>
+        <div class="layout-column left-side-column">
+        
+            <!--Probability Chart-->
+            <div class="layout-column chart-wrapper">
+                <h3>Probability Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="probabilityChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Pay 2 Win -->
+            <div class="card sub-layout-card new-metrics-card">
+                <h3>Pay to Win Options</h3>
+                <p>Your Wallet is Crying</p>
+                <div class="pay-to-win-table">
+                    <table class="ptw-table">
+                    <thead>
+                        <tr>
+                            <th>Lunite Options</th>
+                            <th>First Time Bonus</th>
+                            <th>Pack 1</th>
+                            <th>Pack 2</th>
+                            <th>Pack 3</th>
+                            <th>Row Total</th>
+                            <th>Row Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ptwTableBody">
+                        <tr class="ptw-row">
+                            <td>x60</td>
+                            <!-- The "First Time" checkbox has an extra data attribute -->
+                            <td><input type="checkbox" class="ptw-checkbox first-time-cb" data-lunites="60" data-bonus="60" data-cost="1"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="60" data-bonus="0" data-cost="1"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="60" data-bonus="0" data-cost="1"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="60" data-bonus="0" data-cost="1"></td>
+                            <td class="row-total">0</td>
+                            <td class="row-cost">0.00</td>
+                        </tr>
+                        <tr class="ptw-row">
+                            <td>x300</td>
+                            <!-- The "First Time" checkbox has an extra data attribute -->
+                            <td><input type="checkbox" class="ptw-checkbox first-time-cb" data-lunites="300" data-bonus="300" data-cost="5"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="300" data-bonus="0" data-cost="5"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="300" data-bonus="0" data-cost="5"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="300" data-bonus="0" data-cost="5"></td>
+                            <td class="row-total">0</td>
+                            <td class="row-cost">0.00</td>
+                        </tr>
+                        <tr class="ptw-row">
+                            <td>x980</td>
+                            <!-- The "First Time" checkbox has an extra data attribute -->
+                            <td><input type="checkbox" class="ptw-checkbox first-time-cb" data-lunites="980" data-bonus="980" data-cost="15"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="980" data-bonus="0" data-cost="15"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="980" data-bonus="0" data-cost="15"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="980" data-bonus="0" data-cost="15"></td>
+                            <td class="row-total">0</td>
+                            <td class="row-cost">0.00</td>
+                        </tr>
+                        <tr class="ptw-row">
+                            <td>x1980</td>
+                            <!-- The "First Time" checkbox has an extra data attribute -->
+                            <td><input type="checkbox" class="ptw-checkbox first-time-cb" data-lunites="1980" data-bonus="1980" data-cost="30"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="1980" data-bonus="0" data-cost="30"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="1980" data-bonus="0" data-cost="30"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="1980" data-bonus="0" data-cost="30"></td>
+                            <td class="row-total">0</td>
+                            <td class="row-cost">0.00</td>
+                        </tr>
+                        <tr class="ptw-row">
+                            <td>x3280</td>
+                            <!-- The "First Time" checkbox has an extra data attribute -->
+                            <td><input type="checkbox" class="ptw-checkbox first-time-cb" data-lunites="3280" data-bonus="3280" data-cost="50"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="3280" data-bonus="0" data-cost="50"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="3280" data-bonus="0" data-cost="50"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="3280" data-bonus="0" data-cost="50"></td>
+                            <td class="row-total">0</td>
+                            <td class="row-cost">0.00</td>
+                        </tr>
+                        <tr class="ptw-row">
+                            <td>x6480</td>
+                            <!-- The "First Time" checkbox has an extra data attribute -->
+                            <td><input type="checkbox" class="ptw-checkbox first-time-cb" data-lunites="6480" data-bonus="6480" data-cost="100"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="6480" data-bonus="0" data-cost="100"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="6480" data-bonus="0" data-cost="100"></td>
+                            <td><input type="checkbox" class="ptw-checkbox" data-lunites="6480" data-bonus="0" data-cost="100"></td>
+                            <td class="row-total">0</td>
+                            <td class="row-cost">0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+
+                <p>Note: All calculations assume purchases are made today.</p>
+                <p>Please spend responsibly.</p>
+
             </div>
         </div>
         
