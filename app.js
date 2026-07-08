@@ -167,14 +167,14 @@ const incomeSections = [
                 id: "toa",
                 name: "Tower of Adversity",
                 reward: { amount: 800, type: "astrites" },
-                options: ["1st Reset", "2nd Reset"],
+                options: ["1st Reset (7/20)", "2nd Reset (8/17)"],
                 layout: "stacked"
             },
             {
                 id: "wiwa",
                 name: "Whimpering Wastes",
                 reward: { amount: 800, type: "astrites" },
-                options: ["1st Reset", "2nd Reset"],
+                options: ["1st Reset (7/6)", "2nd Reset (8/3)"],
                 layout: "stacked"
             },
             {
@@ -186,7 +186,7 @@ const incomeSections = [
             },
             {
                 id:"holograms",
-                name: "Holograms",
+                name: "Holograms - Denia",
                 reward: { amount: 120, type: "astrites" },
                 options:[],
                 layout: "header-inline"
@@ -201,17 +201,17 @@ const incomeSections = [
                 id: "mainStory",
                 name: "Main Story Quests",
                 options: [
-                    {label: "Ch.4 Act 1: The Wind Before the Storm", amount: 180, type: "astrites"},
-                    {label: "Ch.4 Act 2: Xuanling Sings, Storm Quelled", amount: 180, type: "astrites"},
-                    {label: "Ch.4 Segue: The Chant of Unseen Ties", amount: 120, type: "astrites"}
+                    {label: "Ch.4 Act 1: The Wind Before the Storm", amount: 200, type: "astrites"},
+                    {label: "Ch.4 Act 2: Xuanling Sings, Storm Quelled", amount: 200, type: "astrites"},
+                    {label: "Ch.4 Segue: The Chant of Unseen Ties", amount: 100, type: "astrites"}
                 ],
                 layout: "stacked"
             },
             {
                 id: "sideQuests",
                 name: "Side Quests",
-                reward: { amount: 60, type: "astrites" },
-                options: ["Place Holder A","Place Holder B"],
+                reward: { amount: 100, type: "astrites" },
+                options: ["Autopuppets in Fog Veiled Chambers","Faithful Heart Tested at Skyfall"],
                 layout: "stacked"
             },
             {
@@ -224,7 +224,7 @@ const incomeSections = [
             {
                 id: "explorationStory",
                 name: "Exploration Quests",
-                reward: { amount: 120, type: "astrites" },
+                reward: { amount: 800, type: "astrites" },
                 options: ["Place Holder A","Place Holder B"],
                 layout: "stacked"
             }
@@ -252,7 +252,7 @@ const incomeSections = [
             },
             {
                 id: "trials",
-                name: "Trials",
+                name: "Trials (May include 1.X reruns)",
                 reward: { amount: 20, type: "astrites" },
                 options: ["Yang-Yang","Luuk","Lynae","Suisui","Aemeath"],
                 layout: "stacked"
@@ -284,13 +284,13 @@ const incomeSections = [
                 id: "limitedEvents",
                 name: "Limited Events",
                 options:[
-                    {label: "Footprints", amount: 400, type: "astrites"},
+                    {label: "Shape of Yesterday", amount: 180, type: "astrites"},
                     {label: "Matrix Reform", amount: 400, type: "astrites"},
                     {label: "Lollo Campaign", amount: 400, type: "astrites"},
-                    {label: "Virtual Crisis", amount: 200, type: "astrites"},
-                    {label: "Lament Recon", amount: 800, type: "astrites"},
+                    {label: "Virtual Crisis", amount: 500, type: "astrites"},
+                    {label: "Lament Recon", amount: 400, type: "astrites"},
                     {label: "Action Highlights", amount: 400, type: "astrites"},
-                    {label: "A Glimpse of Xuanfang", amount: 200, type: "astrites"},
+                    {label: "A Glimpse of Xuanfang", amount: 500, type: "astrites"},
                     {label: "In Search of Lost Jade", amount: 200, type: "astrites"},
                 ],
                 layout: "stacked"
