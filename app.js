@@ -285,10 +285,10 @@ const incomeSections = [
                 name: "Limited Events",
                 options:[
                     {label: "Shape of Yesterday", amount: 180, type: "astrites"},
-                    {label: "Matrix Reform", amount: 400, type: "astrites"},
+                    {label: "Mingshen Notices", amount: 400, type: "astrites"},
                     {label: "Lollo Campaign", amount: 400, type: "astrites"},
                     {label: "Virtual Crisis", amount: 500, type: "astrites"},
-                    {label: "Lament Recon", amount: 400, type: "astrites"},
+                    {label: "Lament Recon", amount: 1200, type: "astrites"},
                     {label: "Action Highlights", amount: 400, type: "astrites"},
                     {label: "A Glimpse of Xuanfang", amount: 500, type: "astrites"},
                     {label: "In Search of Lost Jade", amount: 200, type: "astrites"},
