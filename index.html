@@ -56,19 +56,19 @@
                 </div>
 
                 <div class="subcard">
-                    <label for="startingTides">Tides</label>
+                    <label for="startingTides">Radiant Tides</label>
                     <input type="number" id="startingTides">
                 </div>
 
                 <div class="subcard">
-                    <label for="startingWeapon">Weapon</label>
+                    <label for="startingWeapon">Forging Tides</label>
                     <input type="number" id="startingWeapons">
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <h3>Current Pull Situation</h3>
+            <h3>Current Pity Situation</h3>
             <div class="subgrid">
                 <div class="subcard">
                     <label for="pity">Weapon Pity</label>
@@ -85,8 +85,9 @@
                 </div>
 
                 <div class="subcard">
-                    <label for="date">End of Patch Date</label>
-                    <input type="date" id="date">
+                    <label for="date">Pull Deadline</label>
+                    <input type="date" id="date" value="2026-08-21">
+                    <p style="font-size: 0.8rem; color: #666;">Default: End of Patch</p>
                 </div>
             </div>
         </div>
@@ -99,7 +100,26 @@
                 </div>
 
                 <div class="subcard">
-                    <label><input type="checkbox" id="battlePass"> Battle Pass</label>
+                    <div class="checkbox-group">
+                        <!-- Primary Checkbox -->
+                        <label class="income-header-row">
+                            <input type="checkbox" id="battle-pass-toggle"> Battle Pass
+                        </label>
+
+                        <!-- Changed from <label> to <div> and added 'checkbox-group' to stack them -->
+                        <div class="hidden-dependent checkbox-group" id="bp-premium-container">
+                            
+                            <label class="income-header-row">
+                                └ <input type="checkbox" id="bp-premium-toggle"> Connoisseur Channel?
+                            </label>
+
+                            <!-- Added a specific class to indent this secondary option -->
+                            <label class="income-header-row bp-sub-option">
+                                — <input type="checkbox" id="bp-complete-toggle"> Completed?
+                            </label>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -112,6 +132,7 @@
 <!-- ===================== Income ===================== -->
 <section id="income" class="income-section">
     <h2>Astrite Income Sources Patch 3.4 - 3.5</h2>
+    <p>Please select all completed income sources - otherwise your projections may be artificially inflated.</p>
 
     <form id="incomeForm">
     <div class="grid income-grid", id="incomeContainer"></div>
@@ -124,6 +145,10 @@
 <!-- ===================== Future Plans & Goals Section ===================== -->
 <section id="planner" class="data-section">
     <h2>Future Plans & Goals</h2>
+    <p>All estimates are based on projected pull counts from the section above.</p>
+    <p>Estimates are based on 10,000 simulated pull sessions, and the success rates
+        reflect the proportion of simulations which successfully achieved the desired priority goals.
+    </p>
     
     <div class="summary-wrapper">
         
@@ -300,6 +325,7 @@
             <!--Probability Chart-->
             <div class="layout-column chart-wrapper">
                 <h3>Probability Distribution</h3>
+                <p>Represent the current and projected character pulling capabilities</p>
                 <div class="chart-container">
                     <canvas id="probabilityChart"></canvas>
                 </div>
@@ -396,6 +422,7 @@
         <!-- Table Side -->
         <div class="layout-column table-wrapper">
             <h3>Currency Expense Breakdown</h3>
+            <p>Represent the current and projected character pulling capabilities</p>
             <div class="table-responsive">
                 <table>
                     <thead>
