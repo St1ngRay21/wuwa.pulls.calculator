@@ -18,7 +18,6 @@ function refreshInputs() {
 const tableBody = document.getElementById("dataTableBody");
 const incomeContainer = document.getElementById("incomeContainer");
 
-
 // ===================== STORAGE =====================
 const STORAGE_PREFIX = "wuwa_";
 
@@ -39,7 +38,6 @@ const loadValue = input =>
 const saveValue = (input, value) =>
     localStorage.setItem(storageKey(input), value);
 
-
 // ===================== STATE =====================
 const state = {};
 
@@ -53,7 +51,6 @@ function syncState() {
                 : Number(raw) || 0;
     });
 }
-
 
 // ===================== INPUT HANDLING =====================
 function initInputs() {
@@ -94,6 +91,41 @@ function enforceMax(input) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    
+    const bpToggle = document.getElementById("battle-pass-toggle");
+    const bpPremiumContainer = document.getElementById("bp-premium-container");
+    const bpPremiumCheckbox = document.getElementById("bp-premium-toggle");
+    const bpCompleteCheckbox = document.getElementById("bp-complete-toggle"); 
+
+    // 1. INITIALIZATION: Check the state immediately on page load
+    // (This ensures if it was saved as checked, the container stays open)
+    if (bpToggle && bpToggle.checked) {
+        bpPremiumContainer.classList.add("show");
+    }
+
+    // 2. EVENT LISTENER: Watch for changes when the user clicks
+    if (bpToggle) {
+        bpToggle.addEventListener("change", function() {
+            if (this.checked) {
+                // Show the sub-checkboxes
+                bpPremiumContainer.classList.add("show");
+            } else {
+                // Hide the sub-checkboxes
+                bpPremiumContainer.classList.remove("show");
+                
+                // Uncheck the hidden options automatically 
+                if (bpPremiumCheckbox) bpPremiumCheckbox.checked = false; 
+                if (bpCompleteCheckbox) bpCompleteCheckbox.checked = false;
+                
+                // Note: If you have a save() function for your localStorage, 
+                // you may want to call it here to save the newly unchecked states.
+            }
+        });
+    }
+
+});
+
 // ===================== Daily and Weekly Calculations =====================
 
 function getInputElement(id) {
@@ -101,14 +133,21 @@ function getInputElement(id) {
 }
 
 function calculateDailies() {
-
-    const dateValue = loadValue(getInputElement("date"));
-    const luniteSub = loadValue(getInputElement("luniteSub")) === "true";
+    // 1. Read the value directly from the input element
+    const dateInput = getInputElement("date");
+    const dateValue = dateInput ? dateInput.value : null;
+    
+    // Check for lunite sub directly
+    const luniteSubInput = getInputElement("luniteSub");
+    const luniteSub = luniteSubInput ? luniteSubInput.checked : false;
 
     if (!dateValue) return 0;
 
     const today = new Date();
-    const endDate = new Date(dateValue);
+    
+    // 2. Safely parse the YYYY-MM-DD string into local time
+    const [year, month, day] = dateValue.split('-');
+    const endDate = new Date(year, month - 1, day);
 
     const diffTime = endDate - today;
     const daysRemaining = Math.max(Math.ceil(diffTime / (1000 * 60 * 60 * 24)), 0);
@@ -119,12 +158,16 @@ function calculateDailies() {
 }
 
 function calculateWeeklies() {
-
-    const dateValue = loadValue(getInputElement("date"));
+    const dateInput = getInputElement("date");
+    const dateValue = dateInput ? dateInput.value : null;
+    
     if (!dateValue) return 0;
 
     const today = new Date();
-    const endDate = new Date(dateValue);
+    
+    // Safely parse the YYYY-MM-DD string into local time
+    const [year, month, day] = dateValue.split('-');
+    const endDate = new Date(year, month - 1, day);
 
     today.setHours(0,0,0,0);
     endDate.setHours(0,0,0,0);
@@ -299,7 +342,6 @@ const incomeSections = [
     }
 ];
 
-
 // ===================== INCOME RENDER =====================
 function renderIncomeSections(){
     const container = document.getElementById("incomeContainer");
@@ -401,7 +443,6 @@ function createIncomeCard(item, baseId) {
     `;
 }
 
-
 // ===================== Input CALCULATIONS =====================
 function calculateIncomeTotals() {
 
@@ -471,7 +512,9 @@ function calculateIncomeTotals() {
     });
 
     // INPUT-BASED BONUSES
-    const battlePassInput = document.getElementById("battlePass");
+    const battlePassInput = document.getElementById("battle-pass-toggle");
+    const premiumInput = document.getElementById("bp-premium-toggle");
+    const completeInput = document.getElementById("bp-complete-toggle");
     const luniteSubInput = document.getElementById("luniteSub");
 
     if (battlePassInput) {
@@ -480,7 +523,24 @@ function calculateIncomeTotals() {
         if (isActive) {
             totals.tides += 5;
             totals.astrites += 800;
-            totals.cost += 10; // Assuming $10 for the Battle Pass
+            totals.cost += 10;
+        }
+    }
+
+    if(premiumInput) {
+        const isActive = loadValue(premiumInput) === "true";
+
+        if (isActive) {
+            totals.cost += 10;
+        }
+    }
+
+    if(completeInput) {
+        const isActive = loadValue(completeInput) === "true";
+
+        if (isActive) {
+            totals.tides -=5;
+            totals.astrites -= 800;
         }
     }
 
@@ -573,7 +633,6 @@ function calculate() {
         irlCost: `$${(costs + ptwCosts).toFixed(2)}`
     };
 }
-
 
 // ===================== TABLE LOGIC =====================
 function computeRowResources(index, calculated) {
@@ -934,7 +993,6 @@ function renderProbabilityChart(calculated) {
     });
 }
 
-
 // ===================== Future Plans & Goals Layout =====================
 // Current Situation
 function renderSummary(calculated) {
@@ -1222,7 +1280,7 @@ function updateUIsimulation(simData) {
     const failData = [];
     const failColors = [];
 
-    const modernPalette = ['#004d40', '#00695c', '#00796b', '#00897b', '#26a69a', '#4db6ac', '#80cbc4'];
+    const modernPalette = ['#E06D53', '#FAB162', '#62A87C', '#5C9EAD', '#8F7199', '#C45A85', '#F4A261', '#2A9D8F', '#E76F51', '#264653'];
 
     simData.milestones.forEach((m, idx) => {
         if (simData.failures[m.id] > 0) {
