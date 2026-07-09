@@ -409,7 +409,8 @@ function calculateIncomeTotals() {
         astrites: 0,
         tides: 0,
         lunites: 0,
-        weapons: 0
+        weapons: 0,
+        cost: 0
     };
 
     incomeSections.forEach(section => {
@@ -471,6 +472,7 @@ function calculateIncomeTotals() {
 
     // INPUT-BASED BONUSES
     const battlePassInput = document.getElementById("battlePass");
+    const luniteSubInput = document.getElementById("luniteSub");
 
     if (battlePassInput) {
         const isActive = loadValue(battlePassInput) === "true";
@@ -478,6 +480,15 @@ function calculateIncomeTotals() {
         if (isActive) {
             totals.tides += 5;
             totals.astrites += 800;
+            totals.cost += 10; // Assuming $10 for the Battle Pass
+        }
+    }
+
+    if (luniteSubInput) {
+        const isActive = loadValue(luniteSubInput) === "true";
+
+        if (isActive) {
+            totals.cost += 5; // Assuming $5 for the Lunite Subscription
         }
     }
 
@@ -540,9 +551,11 @@ function calculate() {
     const incLunites = state.totals?.lunites || 0;
     const incTides = state.totals?.tides || 0;
     const incWeapons = state.totals?.weapons || 0;
+    const costs = state.totals?.cost || 0;
     const dailies = state.daily || 0;
     const weeklies = state.weekly || 0;
     const ptwTotals = state.globalLunites || 0;
+    const ptwCosts = state.globalCost || 0;
 
     return {
         pity: state.pity || 0,
@@ -557,7 +570,7 @@ function calculate() {
         projectedPulls: Math.floor((astrites + incAstrites + weeklies + dailies + lunites + incLunites + ptwTotals) / 160 + tides + incTides),
         initialProjectedPulls: Math.floor((astrites + incAstrites + weeklies + dailies + lunites + incLunites + ptwTotals) / 160 + tides + incTides),
         projectedWeapons: Math.floor((weapons + incWeapons)),
-        irlCost: "—"
+        irlCost: `$${(costs + ptwCosts).toFixed(2)}`
     };
 }
 
