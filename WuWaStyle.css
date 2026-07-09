@@ -117,12 +117,7 @@ input:focus {
 
 
 /* ===================== Sections ===================== */
-.inputs-section {
-    max-width: 1200px;
-    text-align: center;
-    margin: 0 auto;
-    background-color: var(--bg-light);
-}
+.inputs-section,
 .income-section,
 .data-section,
 .outputs-section {
@@ -234,8 +229,31 @@ input[type="number"] {
 }
 
 input[type="checkbox"] {
-    transform: scale(1.2);
+    transform: scale(1.3);
     cursor: pointer;
+}
+
+input[type="date"] {
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+/* Hide the dependent checkbox by default */
+.hidden-dependent {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-left: 15px; /* Indents it so it looks like a sub-option */
+    transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+/* When the JS adds this class, the checkbox will slide into view */
+.hidden-dependent.show {
+    max-height: 80px; /* Large enough to fit the row */
+    opacity: 1;
+    margin-top: 8px;
 }
 
 
@@ -335,7 +353,6 @@ input[type="checkbox"] {
 
 /* Optional: Add a little 'warning' icon or style the text specifically */
 .outputs-section tr.insufficient-funds td:last-child::after {
-    content: " ⚠️";
     font-size: 10px;
     opacity: 0.6;
 }
