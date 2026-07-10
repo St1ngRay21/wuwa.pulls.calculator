@@ -253,8 +253,8 @@ const incomeSections = [
             {
                 id: "sideQuests",
                 name: "Side Quests",
-                reward: { amount: 100, type: "astrites" },
-                options: ["Autopuppets in Fog Veiled Chambers","Faithful Heart Tested at Skyfall"],
+                reward: { amount: 10, type: "astrites" },
+                options: ["Shades of Battle","Lingering Echoes"],
                 layout: "stacked"
             },
             {
@@ -267,8 +267,8 @@ const incomeSections = [
             {
                 id: "explorationStory",
                 name: "Exploration Quests",
-                reward: { amount: 80, type: "astrites" },
-                options: ["Place Holder A","Place Holder B"],
+                reward: { amount: 75, type: "astrites" },
+                options: ["Faithful Heart Tested at Skyfall","Autopuppets in Fog Veiled Chambers"],
                 layout: "stacked"
             }
         ]
@@ -295,7 +295,7 @@ const incomeSections = [
             },
             {
                 id: "trials",
-                name: "Trials (may include 1.X reruns)",
+                name: "Trials",
                 reward: { amount: 20, type: "astrites" },
                 options: ["Yang-Yang","Luuk","Lynae","Peppermint","Peach Parfait","Suisui","Aemeath"],
                 layout: "stacked"
