@@ -297,7 +297,7 @@ const incomeSections = [
                 id: "trials",
                 name: "Trials (may include 1.X reruns)",
                 reward: { amount: 20, type: "astrites" },
-                options: ["Yang-Yang","Luuk","Lynae","Suisui","Aemeath"],
+                options: ["Yang-Yang","Luuk","Lynae","Peppermint","Peach Parfait","Suisui","Aemeath"],
                 layout: "stacked"
             }
         ]
