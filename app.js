@@ -254,7 +254,7 @@ const incomeSections = [
                 id: "sideQuests",
                 name: "Side Quests",
                 reward: { amount: 10, type: "astrites" },
-                options: ["Shades of Battle","Lingering Echoes"],
+                options: ["Disappearance Case: The Visitor from Jinzhoou","The Super, Ultra Extreme...Super Challenge", "It Remembers"],
                 layout: "stacked"
             },
             {
@@ -267,8 +267,11 @@ const incomeSections = [
             {
                 id: "explorationStory",
                 name: "Exploration Quests",
-                reward: { amount: 75, type: "astrites" },
-                options: ["Faithful Heart Tested at Skyfall","Autopuppets in Fog Veiled Chambers"],
+                options:[
+                    {label: "Code Red: Corehazard", amount: 100, type: "astrites"},
+                    {label: "Faithful Heart Tested at Skyfall", amount: 100, type: "astrites"},
+                    {label: "Autopuppets in Fog Veiled Chambers", amount: 50, type: "astrites"}
+                    ],
                 layout: "stacked"
             }
         ]
@@ -522,7 +525,7 @@ function calculateIncomeTotals() {
 
         if (isActive) {
             totals.tides += 5;
-            totals.astrites += 800;
+            totals.astrites += 650;
             totals.cost += 10;
         }
     }
@@ -540,7 +543,7 @@ function calculateIncomeTotals() {
 
         if (isActive) {
             totals.tides -=5;
-            totals.astrites -= 800;
+            totals.astrites -= 650;
         }
     }
 
