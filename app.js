@@ -64,6 +64,12 @@ function initInputs() {
             } else {
                 input.value = saved;
             }
+
+            //Set initial slider % text on load
+            if (input.type === "range" && input.id.endsWith("-slider")) {
+                const span = document.getElementById(input.id.replace("-slider", "-val"));
+                if (span) span.textContent = saved + "%";
+            }
         }
 
         // Save
@@ -74,6 +80,13 @@ function initInputs() {
                     : input.value;
 
             saveValue(input, value);
+
+            // Update slider % text dynamically while dragging
+            if (input.type === "range" && input.id.endsWith("-slider")) {
+                const span = document.getElementById(input.id.replace("-slider", "-val"));
+                if (span) span.textContent = value + "%";
+            }
+
             update();
         };
 
@@ -253,8 +266,15 @@ const incomeSections = [
             {
                 id: "sideQuests",
                 name: "Side Quests",
-                reward: { amount: 10, type: "astrites" },
-                options: ["Disappearance Case: The Visitor from Jinzhoou","The Super, Ultra Extreme...Super Challenge", "It Remembers"],
+                options: [
+                    {label: "Anti-TD Kinetic", amount: 10, type: "astrites"},
+                    {label: "Art of Explosion", amount: 10, type: "astrites"},
+                    {label: "Autopuppets in Arms", amount: 10, type: "astrites"},
+                    {label: "Faithful Heart Tested at Skyfall: Epilogue", amount: 10, type: "astrites"},
+                    {label: "Garden of Seasons", amount: 10, type: "astrites"},
+                    {label: "The Smoke Still Rises", amount: 10, type: "astrites"},
+                    {label: "The Super, Ultra Extreme... Super Challenge", amount: 5, type: "astrites"},
+                ],
                 layout: "stacked"
             },
             {
@@ -262,7 +282,7 @@ const incomeSections = [
                 name: "World Exploration",
                 reward: { amount: 2500, type: "astrites" },
                 options:[],
-                layout: "header-inline"
+                layout: "header-inline-slider"
             },
             {
                 id: "explorationStory",
@@ -413,6 +433,20 @@ function createIncomeCard(item, baseId) {
             </label>
         `;
     } 
+
+    //Slider Layout (for exploration)
+    else if (item.layout === "header-inline-slider") {
+        header = `
+            <label class="income-header-row">
+                <input type="checkbox" id="${baseId}-0">
+                <span class="income-title">${item.name}</span>
+            </label>
+            <div class="slider-container" style="padding-left: 25px; margin-top: 5px; display: flex; align-items: center; gap: 10px;">
+                <input type="range" id="${baseId}-slider" min="0" max="100" value="0" style="flex-grow: 1;">
+                <span id="${baseId}-val" style="min-width: 35px; text-align: right; font-size: 0.9em; font-weight: bold;">0%</span>
+            </div>
+        `;
+    }
     
     // Stacked Layout
     else {
@@ -481,6 +515,48 @@ function calculateIncomeTotals() {
                         });
                     } else {
                         // Single reward object fallback
+                        if (totals.hasOwnProperty(item.reward.type)) {
+                            totals[item.reward.type] += item.reward.amount;
+                        }
+                    }
+                }
+            }
+
+            // HEADER-INLINE-SLIDER
+            else if (item.layout === "header-inline-slider") {
+                const inputCb = document.getElementById(`${item.id}-0`);
+                const inputSlider = document.getElementById(`${item.id}-slider`);
+                if (!inputCb || !inputSlider) return;
+
+                const checked = loadValue(inputCb) === "true";
+                const sliderVal = Number(loadValue(inputSlider)) || 0;
+
+                // Only calculate if the main box ISN'T fully checked
+                if (checked && item.reward) {
+                    
+                    // Multiply the reward by the remaining percentage
+                    const multiplier = (100 - sliderVal) / 100;
+                    
+                    if (Array.isArray(item.reward)) {
+                        item.reward.forEach(r => {
+                            if (totals.hasOwnProperty(r.type)) {
+                                totals[r.type] += Math.floor(r.amount * multiplier);
+                            }
+                        });
+                    } else {
+                        if (totals.hasOwnProperty(item.reward.type)) {
+                            totals[item.reward.type] += Math.floor(item.reward.amount * multiplier);
+                        }
+                    }
+                } else {
+                    // If the main box is unchecked, add the full reward
+                    if (Array.isArray(item.reward)) {
+                        item.reward.forEach(r => {
+                            if (totals.hasOwnProperty(r.type)) {
+                                totals[r.type] += r.amount;
+                            }
+                        });
+                    } else {
                         if (totals.hasOwnProperty(item.reward.type)) {
                             totals[item.reward.type] += item.reward.amount;
                         }
