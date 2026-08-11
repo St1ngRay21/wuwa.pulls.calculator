@@ -223,14 +223,14 @@ const incomeSections = [
                 id: "toa",
                 name: "Tower of Adversity",
                 reward: { amount: 800, type: "astrites" },
-                options: ["1st Reset (7/20)", "2nd Reset (8/17)"],
+                options: ["1st Reset (8/17)", "2nd Reset (9/14)"],
                 layout: "stacked"
             },
             {
                 id: "wiwa",
                 name: "Whimpering Wastes",
                 reward: { amount: 800, type: "astrites" },
-                options: ["1st Reset (7/6)", "2nd Reset (8/3)"],
+                options: ["1st Reset (8/31)", "2nd Reset (9/28)"],
                 layout: "stacked"
             },
             {
@@ -239,13 +239,13 @@ const incomeSections = [
                 reward: { amount: 400, type: "astrites" },
                 options:[],
                 layout: "header-inline"
-            },
-            {
-                id:"holograms",
-                name: "Holograms - Denia",
-                reward: { amount: 120, type: "astrites" },
-                options:[],
-                layout: "header-inline"
+            //},
+            //{
+                //id:"holograms",
+                //name: "Holograms - Denia",
+                //reward: { amount: 120, type: "astrites" },
+                //options:[],
+                //layout: "header-inline"
             }
         ]
     },
@@ -257,9 +257,8 @@ const incomeSections = [
                 id: "mainStory",
                 name: "Main Story Quests",
                 options: [
-                    {label: "Ch.4 Act 1: The Wind Before the Storm", amount: 200, type: "astrites"},
-                    {label: "Ch.4 Act 2: Xuanling Sings, Storm Quelled", amount: 200, type: "astrites"},
-                    {label: "Ch.4 Segue: The Chant of Unseen Ties", amount: 100, type: "astrites"}
+                    {label: "Ch.4 Act 3: Song of the Heart Sword", amount: 200, type: "astrites"},
+                    {label: "Ch.4 Segue: The Nethermancer's Requiem", amount: 100, type: "astrites"}
                 ],
                 layout: "stacked"
             },
@@ -267,20 +266,16 @@ const incomeSections = [
                 id: "sideQuests",
                 name: "Side Quests",
                 options: [
-                    {label: "Anti-TD Kinetic", amount: 10, type: "astrites"},
-                    {label: "Art of Explosion", amount: 10, type: "astrites"},
-                    {label: "Autopuppets in Arms", amount: 10, type: "astrites"},
-                    {label: "Faithful Heart Tested at Skyfall: Epilogue", amount: 10, type: "astrites"},
-                    {label: "Garden of Seasons", amount: 10, type: "astrites"},
-                    {label: "The Smoke Still Rises", amount: 10, type: "astrites"},
-                    {label: "The Super, Ultra Extreme... Super Challenge", amount: 5, type: "astrites"},
+                    {label: "Placeholder A", amount: 10, type: "astrites"},
+                    {label: "Placeholder B", amount: 10, type: "astrites"},
+                    {label: "Placeholder C", amount: 10, type: "astrites"},,
                 ],
                 layout: "stacked"
             },
             {
                 id:"exploration",
                 name: "World Exploration",
-                reward: { amount: 2500, type: "astrites" },
+                reward: { amount: 1000, type: "astrites" },
                 options:[],
                 layout: "header-inline-slider"
             },
@@ -288,9 +283,8 @@ const incomeSections = [
                 id: "explorationStory",
                 name: "Exploration Quests",
                 options:[
-                    {label: "Code Red: Corehazard", amount: 100, type: "astrites"},
-                    {label: "Faithful Heart Tested at Skyfall", amount: 100, type: "astrites"},
-                    {label: "Autopuppets in Fog Veiled Chambers", amount: 50, type: "astrites"}
+                    {label: "Place Holder A", amount: 100, type: "astrites"},
+                    {label: "Place Hodler B", amount: 100, type: "astrites"},
                     ],
                 layout: "stacked"
             }
@@ -304,7 +298,7 @@ const incomeSections = [
                 id: "versionUpdate",
                 name: "Version Update Claims",
                 reward: { amount: 300, type: "astrites" },
-                options: ["3.5 Live Stream","Version Compensation", "Bug Fixes", "3.6 Live Stream"],
+                options: ["3.6 Live Stream","Version Compensation", "Bug Fixes", "3.7 Live Stream"],
                 layout: "stacked"
             },
             {
@@ -320,7 +314,7 @@ const incomeSections = [
                 id: "trials",
                 name: "Trials",
                 reward: { amount: 20, type: "astrites" },
-                options: ["Yang-Yang","Luuk","Lynae","Peppermint","Peach Parfait","Suisui","Aemeath"],
+                options: ["Qingxiau","Denia","Jingran","Hiyuki","Mornye"],
                 layout: "stacked"
             }
         ]
@@ -350,14 +344,10 @@ const incomeSections = [
                 id: "limitedEvents",
                 name: "Limited Events",
                 options:[
-                    {label: "Shape of Yesterday", amount: 180, type: "astrites"},
-                    {label: "Mingshen Notices", amount: 400, type: "astrites"},
-                    {label: "Lollo Campaign", amount: 400, type: "astrites"},
-                    {label: "Virtual Crisis", amount: 500, type: "astrites"},
-                    {label: "Lament Recon", amount: 1200, type: "astrites"},
-                    {label: "Action Highlights", amount: 400, type: "astrites"},
-                    {label: "A Glimpse of Xuanfang", amount: 500, type: "astrites"},
-                    {label: "In Search of Lost Jade", amount: 200, type: "astrites"},
+                    {label: "Resonance Sim Realm", amount: 100, type: "astrites"},
+                    {label: "The Strings Remember", amount: 100, type: "astrites"},
+                    {label: "Second Coming of Solaris", amount: 100, type: "astrites"},
+                    {label: "If Dreams Still Reverberate", amount: 100, type: "astrites"},
                 ],
                 layout: "stacked"
             },
