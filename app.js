@@ -239,13 +239,13 @@ const incomeSections = [
                 reward: { amount: 400, type: "astrites" },
                 options:[],
                 layout: "header-inline"
-            //},
-            //{
-                //id:"holograms",
-                //name: "Holograms - Denia",
-                //reward: { amount: 120, type: "astrites" },
-                //options:[],
-                //layout: "header-inline"
+            },
+            {
+                id:"holograms",
+                name: "Holograms - Snare",
+                reward: { amount: 120, type: "astrites" },
+                options:[],
+                layout: "header-inline"
             }
         ]
     },
@@ -274,19 +274,19 @@ const incomeSections = [
             },
             {
                 id:"exploration",
-                name: "World Exploration",
-                reward: { amount: 1000, type: "astrites" },
+                name: "Wuthering Exploration",
+                reward: { amount: 800, type: "astrites" },
                 options:[],
                 layout: "header-inline-slider"
-            },
-            {
-                id: "explorationStory",
-                name: "Exploration Quests",
-                options:[
-                    {label: "Place Holder A", amount: 100, type: "astrites"},
-                    {label: "Place Hodler B", amount: 100, type: "astrites"},
-                    ],
-                layout: "stacked"
+            //},
+            //{
+                //id: "explorationStory",
+                //name: "Exploration Quests",
+                //options:[
+                    //{label: "Place Holder A", amount: 100, type: "astrites"},
+                    //{label: "Place Hodler B", amount: 100, type: "astrites"},
+                    //],
+                //layout: "stacked"
             }
         ]
     },
@@ -344,10 +344,10 @@ const incomeSections = [
                 id: "limitedEvents",
                 name: "Limited Events",
                 options:[
-                    {label: "Resonance Sim Realm", amount: 100, type: "astrites"},
-                    {label: "The Strings Remember", amount: 100, type: "astrites"},
-                    {label: "Second Coming of Solaris", amount: 100, type: "astrites"},
-                    {label: "If Dreams Still Reverberate", amount: 100, type: "astrites"},
+                    {label: "Resonance Sim Realm", amount: 1200, type: "astrites"},
+                    {label: "The Strings Remember", amount: 400, type: "astrites"},
+                    {label: "Second Coming of Solaris", amount: 400, type: "astrites"},
+                    {label: "If Dreams Still Reverberate", amount: 600, type: "astrites"},
                 ],
                 layout: "stacked"
             },
